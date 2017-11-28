@@ -1,4 +1,4 @@
-package fr.fcomte.univ.iut.martin.florent.topquiz;
+package fr.fcomte.univ.iut.martin.florent.topquiz.views;
 
 import android.content.Intent;
 import android.os.Bundle;

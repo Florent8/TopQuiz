@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="fr.fcomte.univ.iut.martin.florent.topquiz.GameActivity">
+    tools:context="fr.fcomte.univ.iut.martin.florent.topquiz.views.GameActivity">
 
     <TextView
+        android:id="@+id/question_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="5dp"
@@ -20,23 +21,31 @@
         android:textStyle="bold" />
 
     <Button
+        android:id="@+id/answer1_btn"
         style="@style/AnswerButtonTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:tag="1" />
 
     <Button
+        android:id="@+id/answer2_btn"
         style="@style/AnswerButtonTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:tag="2" />
 
     <Button
+        android:id="@+id/answer3_btn"
         style="@style/AnswerButtonTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:tag="3" />
 
     <Button
+        android:id="@+id/answer4_btn"
         style="@style/AnswerButtonTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:tag="4" />
 
 </LinearLayout>
