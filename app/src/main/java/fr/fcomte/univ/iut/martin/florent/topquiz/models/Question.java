@@ -8,6 +8,7 @@ public final class Question {
     private String answer3;
     private String answer4;
     private byte   goodAnswer;
+    private byte score = 4;
 
     public Question(final String question, final String answer1, final String answer2, final String answer3, final String answer4, final byte goodAnswer) {
         this.question = question;
@@ -38,7 +39,12 @@ public final class Question {
         return answer4;
     }
 
+    public byte getScore() {
+        return score;
+    }
+
     public byte getGoodAnswer() {
+        score--;
         return goodAnswer;
     }
 }

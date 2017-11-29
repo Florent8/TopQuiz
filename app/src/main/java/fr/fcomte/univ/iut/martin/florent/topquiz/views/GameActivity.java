@@ -2,6 +2,7 @@ package fr.fcomte.univ.iut.martin.florent.topquiz.views;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,12 +26,14 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_game;
 public final class GameActivity extends AppCompatActivity implements Button.OnClickListener {
 
     private QuestionBank bank;
-    private Question     q;
-    private TextView     question;
-    private Button       answer1;
-    private Button       answer2;
-    private Button       answer3;
-    private Button       answer4;
+    private byte numberOfQuestions = 4;
+    private byte score             = 0;
+    private Question q;
+    private TextView question;
+    private Button   answer1;
+    private Button   answer2;
+    private Button   answer3;
+    private Button   answer4;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -55,14 +58,22 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
     void displayQuestion(Question q) {
         this.q = q;
         question.setText(q.getQuestion());
+
         answer1.setBackgroundColor(WHITE);
+        answer1.setClickable(true);
         answer1.setText(q.getAnswer1());
+
         answer2.setBackgroundColor(WHITE);
+        answer2.setClickable(true);
         answer2.setText(q.getAnswer2());
+
         answer3.setBackgroundColor(WHITE);
+        answer3.setClickable(true);
         answer3.setText(q.getAnswer3());
+
         answer4.setBackgroundColor(WHITE);
         answer4.setText(q.getAnswer4());
+        answer4.setClickable(true);
     }
 
     @Override
@@ -70,8 +81,19 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         if (Byte.parseByte(view.getTag().toString()) == q.getGoodAnswer()) {
             view.setBackgroundColor(GREEN);
             makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
-            new Handler().postDelayed(() -> displayQuestion(bank.getQuestion()), 1000);
-        } else
+            score += q.getScore();
+            if (--numberOfQuestions == 0)
+                new AlertDialog.Builder(this)
+                        .setTitle("Jeu terminé")
+                        .setMessage("Votre score est de " + score + ".")
+                        .setPositiveButton("Ok", (dialogInterface, which) -> finish())
+                        .create()
+                        .show();
+            else
+                new Handler().postDelayed(() -> displayQuestion(bank.getQuestion()), 1000);
+        } else {
+            view.setClickable(false);
             view.setBackgroundColor(RED);
+        }
     }
 }

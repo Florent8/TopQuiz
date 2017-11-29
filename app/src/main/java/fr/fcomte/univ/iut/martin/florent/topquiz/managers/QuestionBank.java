@@ -87,6 +87,9 @@ public final class QuestionBank extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex(KEY_ANSWER4)),
                 (byte) cursor.getShort(cursor.getColumnIndex(KEY_GOOD_ANSWER))
         );
+
+        if (idsString.length() != 0)
+            idsString.append(" AND ");
         idsString.append(KEY_ID + "!= ? ");
         idsList.add(cursor.getString(cursor.getColumnIndex(KEY_ID)));
         cursor.close();
