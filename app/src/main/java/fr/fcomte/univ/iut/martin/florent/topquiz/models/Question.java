@@ -2,12 +2,12 @@ package fr.fcomte.univ.iut.martin.florent.topquiz.models;
 
 public final class Question {
 
-    private final String question;
-    private final String answer1;
-    private final String answer2;
-    private final String answer3;
-    private final String answer4;
-    private final byte   goodAnswer;
+    private String question;
+    private String answer1;
+    private String answer2;
+    private String answer3;
+    private String answer4;
+    private byte   goodAnswer;
 
     public Question(final String question, final String answer1, final String answer2, final String answer3, final String answer4, final byte goodAnswer) {
         this.question = question;

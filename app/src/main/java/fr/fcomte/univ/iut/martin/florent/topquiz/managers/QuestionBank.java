@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.BufferedReader;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -47,23 +48,26 @@ public final class QuestionBank extends SQLiteOpenHelper {
                 + KEY_ANSWER4 + " TEXT NOT NULL,"
                 + KEY_GOOD_ANSWER + " INTEGER NOT NULL)");
 
+        Question[] questions;
         try {
-            final BufferedReader br = new BufferedReader(new InputStreamReader(context.getAssets().open("questions.txt")));
-            String question;
-            final ContentValues values = new ContentValues();
-            while ((question = br.readLine()) != null) {
-                values.put(KEY_QUESTION, question);
-                values.put(KEY_ANSWER1, br.readLine());
-                values.put(KEY_ANSWER2, br.readLine());
-                values.put(KEY_ANSWER3, br.readLine());
-                values.put(KEY_ANSWER4, br.readLine());
-                values.put(KEY_GOOD_ANSWER, br.readLine());
-                db.insert(TABLE_QUESTIONS, null, values);
-                br.readLine();
-            }
-            br.close();
-        } catch (final IOException e) {
+            questions = new Gson().fromJson(
+                    new InputStreamReader(context.getAssets().open("questions.json"))
+                    , Question[].class
+            );
+        } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
+        }
+
+        ContentValues values = new ContentValues();
+        for (Question question : questions) {
+            values.clear();
+            values.put(KEY_QUESTION, question.getQuestion());
+            values.put(KEY_ANSWER1, question.getAnswer1());
+            values.put(KEY_ANSWER2, question.getAnswer2());
+            values.put(KEY_ANSWER3, question.getAnswer3());
+            values.put(KEY_ANSWER4, question.getAnswer4());
+            values.put(KEY_GOOD_ANSWER, question.getGoodAnswer());
+            db.insert(TABLE_QUESTIONS, null, values);
         }
     }
 

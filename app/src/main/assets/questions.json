@@ -1,0 +1,82 @@
+[
+  {
+    "question": "Qui est le créateur d'Android ?",
+    "answer1": "Andy Rubin",
+    "answer2": "Steve Wozniak",
+    "answer3": "Jake Wharton",
+    "answer4": "Paul Smith",
+    "goodAnswer": 1
+  },
+  {
+    "question": "Quand le premier Homme a marché sur la Lune ?",
+    "answer1": 1958,
+    "answer2": 1962,
+    "answer3": 1967,
+    "answer4": 1969,
+    "goodAnswer": 4
+  },
+  {
+    "question": "Quelle est le numéro de la maison des Simpsons ?",
+    "answer1": 42,
+    "answer2": 101,
+    "answer3": 666,
+    "answer4": 742,
+    "goodAnswer": 4
+  },
+  {
+    "question": "Vrai ou faux ?",
+    "answer1": "Vrai",
+    "answer2": "Faux",
+    "answer3": "Peut-être",
+    "answer4": "Bof",
+    "goodAnswer": 1
+  },
+  {
+    "question": "Quelle est la couleur du cheval blanc d'Henry IV ?",
+    "answer1": "Blanche",
+    "answer2": "Bleue",
+    "answer3": "Magenta",
+    "answer4": "Octarine",
+    "goodAnswer": 1
+  },
+  {
+    "question": "En quelle année est sorti Mario Bros. ?",
+    "answer1": 1980,
+    "answer2": 1983,
+    "answer3": 1985,
+    "answer4": 1990,
+    "goodAnswer": 2
+  },
+  {
+    "question": "Que signifie le kanji 神 (kami) dans le nom 夜神月 (Light Yagami) ?",
+    "answer1": "Lune",
+    "answer2": "Mort",
+    "answer3": "Dieu",
+    "answer4": "Ténèbres",
+    "goodAnswer": 3
+  },
+  {
+    "question": "Quel est le rang de Maes Hughes (Fullmetal Alchemist) qu'il a acquis après sa mort ?",
+    "answer1": "Lieutenant",
+    "answer2": "Colonel",
+    "answer3": "Lieutenant-colonel",
+    "answer4": "Général de brigade",
+    "goodAnswer": 4
+  },
+  {
+    "question": "Comment se prénomme le dragon présent dans le Sacred Gear d'Issei Hyoudou (Highschool DxD) ?",
+    "answer1": "Albion",
+    "answer2": "Valper",
+    "answer3": "Ddraig",
+    "answer4": "Rias",
+    "goodAnswer": 3
+  },
+  {
+    "question": "17 + 3 = ?",
+    "answer1": 22,
+    "answer2": "3B",
+    "answer3": 1000,
+    "answer4": "π",
+    "goodAnwser": 1
+  }
+]
