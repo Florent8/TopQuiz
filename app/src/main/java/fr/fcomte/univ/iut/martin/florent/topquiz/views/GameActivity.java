@@ -1,5 +1,6 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +26,7 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_game;
 
 public final class GameActivity extends AppCompatActivity implements Button.OnClickListener {
 
+    public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
     private QuestionBank bank;
     private byte numberOfQuestions = 4;
     private byte score             = 0;
@@ -86,7 +88,10 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
                 new AlertDialog.Builder(this)
                         .setTitle("Jeu terminé")
                         .setMessage("Votre score est de " + score + ".")
-                        .setPositiveButton("Ok", (dialogInterface, which) -> finish())
+                        .setPositiveButton("Ok", (dialogInterface, which) -> {
+                            setResult(RESULT_OK, new Intent().putExtra(BUNDLE_EXTRA_SCORE, score));
+                            finish();
+                        })
                         .create()
                         .show();
             else

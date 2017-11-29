@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 
@@ -15,25 +14,22 @@ import java.util.List;
 
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 
-public final class QuestionBank extends SQLiteOpenHelper {
+public final class QuestionBank extends Database {
 
-    private static final String DATABASE_NAME    = "top_quiz_db";
-    private static final byte   DATABASE_VERSION = 1;
-    private static final String TABLE_QUESTIONS  = "questions";
-    private static final String KEY_ID           = "id";
-    private static final String KEY_QUESTION     = "question";
-    private static final String KEY_ANSWER1      = "answer1";
-    private static final String KEY_ANSWER2      = "answer2";
-    private static final String KEY_ANSWER3      = "answer3";
-    private static final String KEY_ANSWER4      = "answer4";
-    private static final String KEY_GOOD_ANSWER  = "good_answer";
+    private static final String TABLE_QUESTIONS = "questions";
+    private static final String KEY_QUESTION    = "question";
+    private static final String KEY_ANSWER1     = "answer1";
+    private static final String KEY_ANSWER2     = "answer2";
+    private static final String KEY_ANSWER3     = "answer3";
+    private static final String KEY_ANSWER4     = "answer4";
+    private static final String KEY_GOOD_ANSWER = "good_answer";
     private final Context context;
     private final String[]      columns   = new String[]{KEY_ID, KEY_QUESTION, KEY_ANSWER1, KEY_ANSWER2, KEY_ANSWER3, KEY_ANSWER4, KEY_GOOD_ANSWER};
     private final List<String>  idsList   = new ArrayList<>();
     private final StringBuilder idsString = new StringBuilder();
 
     public QuestionBank(final Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context);
         this.context = context;
     }
 
@@ -95,9 +91,5 @@ public final class QuestionBank extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return question;
-    }
-
-    @Override
-    public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
     }
 }
