@@ -1,6 +1,7 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.views;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -48,11 +49,11 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         answer4 = findViewById(answer4_btn);
         answer4.setOnClickListener(this);
 
-        displayQuestion();
+        displayQuestion(bank.getQuestion());
     }
 
-    private void displayQuestion() {
-        q = bank.getQuestion();
+    void displayQuestion(Question q) {
+        this.q = q;
         question.setText(q.getQuestion());
         answer1.setBackgroundColor(WHITE);
         answer1.setText(q.getAnswer1());
@@ -69,6 +70,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         if (Byte.parseByte(view.getTag().toString()) == q.getGoodAnswer()) {
             view.setBackgroundColor(GREEN);
             makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
+            new Handler().postDelayed(() -> displayQuestion(bank.getQuestion()), 1000);
         } else
             view.setBackgroundColor(RED);
     }

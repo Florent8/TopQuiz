@@ -51,8 +51,8 @@ public final class QuestionBank extends SQLiteOpenHelper {
         Question[] questions;
         try {
             questions = new Gson().fromJson(
-                    new InputStreamReader(context.getAssets().open("questions.json"))
-                    , Question[].class
+                    new InputStreamReader(context.getAssets().open("questions.json")),
+                    Question[].class
             );
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
