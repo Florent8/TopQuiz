@@ -9,9 +9,10 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Gestion de la table {@value TABLE_QUESTIONS} dans la base de données <br/>
@@ -29,11 +30,12 @@ public final class QuestionBank extends Database {
     private static final String QUESTIONS_JSON_FILE = "questions.json";
     private static final String RANDOM_ORDER_BY     = "random()";
     private final Context context;
-    private final String[]      columns   = new String[]{KEY_ID, KEY_QUESTION, KEY_ANSWER1,
-                                                         KEY_ANSWER2, KEY_ANSWER3, KEY_ANSWER4,
-                                                         KEY_GOOD_ANSWER};
-    private final List<String>  idsList   = new ArrayList<>();
-    private final StringBuilder idsString = new StringBuilder();
+    private final           String[]          columns   = new String[]{KEY_ID, KEY_QUESTION, KEY_ANSWER1,
+                                                                       KEY_ANSWER2, KEY_ANSWER3,
+                                                                       KEY_ANSWER4,
+                                                                       KEY_GOOD_ANSWER};
+    @Getter @Setter private ArrayList<String> idsList   = new ArrayList<>();
+    @Getter @Setter private StringBuilder     idsString = new StringBuilder();
 
     /**
      * Constructeur
