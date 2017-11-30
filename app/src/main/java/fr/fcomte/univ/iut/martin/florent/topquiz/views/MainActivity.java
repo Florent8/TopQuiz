@@ -33,7 +33,7 @@ public final class MainActivity extends AppCompatActivity {
 
         button.setEnabled(false);
         button.setOnClickListener(view -> {
-            player = new Player(nameInput.getText().toString(), (byte) 0);
+            player = new Player((byte) 0, nameInput.getText().toString(), (byte) 0);
             startActivityForResult(new Intent(this, GameActivity.class), GAME_ACTIVITY_REQUEST_CODE);
         });
 
@@ -54,7 +54,7 @@ public final class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK)
             player.setScore(data.getByteExtra(BUNDLE_EXTRA_SCORE, (byte) 0));

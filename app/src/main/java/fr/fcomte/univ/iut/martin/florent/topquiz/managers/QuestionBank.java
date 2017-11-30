@@ -1,6 +1,5 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.managers;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,13 +15,13 @@ import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 
 public final class QuestionBank extends Database {
 
-    private static final String TABLE_QUESTIONS = "questions";
-    private static final String KEY_QUESTION    = "question";
-    private static final String KEY_ANSWER1     = "answer1";
-    private static final String KEY_ANSWER2     = "answer2";
-    private static final String KEY_ANSWER3     = "answer3";
-    private static final String KEY_ANSWER4     = "answer4";
-    private static final String KEY_GOOD_ANSWER = "good_answer";
+    static final String TABLE_QUESTIONS = "questions";
+    static final String KEY_QUESTION    = "question";
+    static final String KEY_ANSWER1     = "answer1";
+    static final String KEY_ANSWER2     = "answer2";
+    static final String KEY_ANSWER3     = "answer3";
+    static final String KEY_ANSWER4     = "answer4";
+    static final String KEY_GOOD_ANSWER = "good_answer";
     private final Context context;
     private final String[]      columns   = new String[]{KEY_ID, KEY_QUESTION, KEY_ANSWER1, KEY_ANSWER2, KEY_ANSWER3, KEY_ANSWER4, KEY_GOOD_ANSWER};
     private final List<String>  idsList   = new ArrayList<>();
@@ -35,14 +34,7 @@ public final class QuestionBank extends Database {
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_QUESTIONS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY,"
-                + KEY_QUESTION + " TEXT NOT NULL,"
-                + KEY_ANSWER1 + " TEXT NOT NULL,"
-                + KEY_ANSWER2 + " TEXT NOT NULL,"
-                + KEY_ANSWER3 + " TEXT NOT NULL,"
-                + KEY_ANSWER4 + " TEXT NOT NULL,"
-                + KEY_GOOD_ANSWER + " INTEGER NOT NULL)");
+        super.onCreate(db);
 
         Question[] questions;
         try {
@@ -50,12 +42,11 @@ public final class QuestionBank extends Database {
                     new InputStreamReader(context.getAssets().open("questions.json")),
                     Question[].class
             );
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException(e.getMessage());
         }
 
-        ContentValues values = new ContentValues();
-        for (Question question : questions) {
+        for (final Question question : questions) {
             values.clear();
             values.put(KEY_QUESTION, question.getQuestion());
             values.put(KEY_ANSWER1, question.getAnswer1());

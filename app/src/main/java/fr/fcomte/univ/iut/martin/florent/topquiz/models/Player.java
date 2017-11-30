@@ -19,7 +19,6 @@ public final class Player implements Comparable<Player> {
     }
 
     public String getName() {
-
         return name;
     }
 
@@ -27,7 +26,7 @@ public final class Player implements Comparable<Player> {
         return score;
     }
 
-    public void setScore(byte score) {
+    public void setScore(final byte score) {
         this.score = score;
     }
 

@@ -28,7 +28,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
 
     public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
     private QuestionBank bank;
-    private byte numberOfQuestions = 4;
+    private byte numberOfQuestions = 1;
     private byte score             = 0;
     private Question q;
     private TextView question;
@@ -57,7 +57,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         displayQuestion(bank.getQuestion());
     }
 
-    void displayQuestion(Question q) {
+    void displayQuestion(final Question q) {
         this.q = q;
         question.setText(q.getQuestion());
 
@@ -79,7 +79,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         if (Byte.parseByte(view.getTag().toString()) == q.getGoodAnswer()) {
             view.setBackgroundColor(GREEN);
             makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
