@@ -8,11 +8,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import fr.fcomte.univ.iut.martin.florent.topquiz.managers.PlayersDatabase;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Player;
 
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_input;
+import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_text_view;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.start_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_main;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.views.GameActivity.BUNDLE_EXTRA_SCORE;
@@ -23,12 +25,14 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.views.GameActivity.BUNDL
  */
 public final class MainActivity extends AppCompatActivity {
 
-    private static final byte   GAME_ACTIVITY_REQUEST_CODE = 1;
-    private static final String PLAYER_PREFERENCE          = "player";
-    private static final String SCORE_PREFERENCE           = "score";
+    private static final byte          GAME_ACTIVITY_REQUEST_CODE = 1;
+    private static final String        PLAYER_PREFERENCE          = "player";
+    private static final String        SCORE_PREFERENCE           = "score";
+    private final        StringBuilder stringBuilder              = new StringBuilder();
     private SharedPreferences preferences;
     private Player            player;
     private PlayersDatabase   playersDatabase;
+    private EditText          nameInput;
 
     /**
      * Initialisation des attributs de l'instance de {@link MainActivity} <br/>
@@ -44,10 +48,12 @@ public final class MainActivity extends AppCompatActivity {
         playersDatabase = new PlayersDatabase(this);
         preferences = getPreferences(MODE_PRIVATE);
 
-        player = new Player(preferences.getString(PLAYER_PREFERENCE, ""));
+        player = new Player(preferences.getString(PLAYER_PREFERENCE, ""),
+                            (byte) preferences.getInt(SCORE_PREFERENCE, 0)
+        );
 
         final Button button = findViewById(start_btn);
-        final EditText nameInput = findViewById(name_input);
+        nameInput = findViewById(name_input);
 
         button.setEnabled(false);
         button.setOnClickListener(view -> {
@@ -68,8 +74,7 @@ public final class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(final CharSequence s, final int i, final int i1, final int i2
-            ) {
+            public void onTextChanged(final CharSequence s, final int i, final int i1, final int i2) {
                 button.setEnabled(s.length() != 0);
             }
 
@@ -77,6 +82,8 @@ public final class MainActivity extends AppCompatActivity {
             public void afterTextChanged(final Editable editable) {
             }
         });
+
+        setPlayerMessage();
     }
 
     /**
@@ -87,8 +94,7 @@ public final class MainActivity extends AppCompatActivity {
      * @param data        {@link Intent}
      */
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data
-    ) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK)
             player.setScore(data.getByteExtra(BUNDLE_EXTRA_SCORE, (byte) 0));
@@ -97,5 +103,21 @@ public final class MainActivity extends AppCompatActivity {
                    .putString(PLAYER_PREFERENCE, player.getName())
                    .putInt(SCORE_PREFERENCE, player.getScore())
                    .apply();
+        setPlayerMessage();
+    }
+
+    /**
+     * Mise à jour du message d'accueil
+     */
+    private void setPlayerMessage() {
+        stringBuilder.setLength(0);
+        if (!player.getName().equals("")) {
+            ((TextView) findViewById(name_text_view)).setText(
+                    stringBuilder.append("Bonjour ").append(player.getName())
+                                 .append(" ! Ravi de vous revoir.\nVotre précédent score était de ")
+                                 .append(player.getScore()).append(".").toString());
+            nameInput.setText(player.getName());
+            nameInput.setSelection(player.getName().length());
+        }
     }
 }

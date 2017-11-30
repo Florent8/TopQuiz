@@ -7,6 +7,7 @@
     tools:context="fr.fcomte.univ.iut.martin.florent.topquiz.views.MainActivity">
 
     <TextView
+        android:id="@+id/name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
