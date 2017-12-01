@@ -1,6 +1,7 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.views;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -46,6 +47,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
                                                      = "precedentQuestionsIdsList";
     static final        String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING
                                                      = "precedentQuestionsIdsString";
+    static final        String BUNDLE_STATE_COLOR    = "answersButtonColor";
     QuestionBank bank;
     byte numberOfQuestions = 1;
     byte score             = 0;
@@ -62,7 +64,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * Affichage de la première question
      *
      * @param savedInstanceState {@link Bundle}
-     * @see GameActivity#displayQuestion()
+     * @see QuestionBank#getQuestion()
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -81,33 +83,43 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         answer4 = findViewById(answer4_btn);
         answer4.setOnClickListener(this);
 
+        q = bank.getQuestion();
         displayQuestion();
     }
 
     /**
      * Affichage sur l'interface d'une question choisie aléatoirement
-     *
-     * @see QuestionBank#getQuestion()
      */
     private void displayQuestion() {
-        this.q = bank.getQuestion();
         question.setText(q.question());
 
-        answer1.setBackgroundColor(WHITE);
-        answer1.setClickable(true);
-        answer1.setText(q.answer1());
+        setButtonDefault(answer1, q.answer1());
+        setButtonDefault(answer2, q.answer2());
+        setButtonDefault(answer3, q.answer3());
+        setButtonDefault(answer4, q.answer4());
+    }
 
-        answer2.setBackgroundColor(WHITE);
-        answer2.setClickable(true);
-        answer2.setText(q.answer2());
+    /**
+     * Création de la vue d'un bouton de réponse à la création d'une question
+     *
+     * @param button {@link Button}
+     * @param text   {@link String}
+     */
+    private void setButtonDefault(final Button button, final String text) {
+        setButton(button, WHITE, text);
+    }
 
-        answer3.setBackgroundColor(WHITE);
-        answer3.setClickable(true);
-        answer3.setText(q.answer3());
-
-        answer4.setBackgroundColor(WHITE);
-        answer4.setText(q.answer4());
-        answer4.setClickable(true);
+    /**
+     * Création de la vue d'un bouton de réponse
+     *
+     * @param button {@link Button}
+     * @param color  {@link android.graphics.Color}
+     * @param text   {@link String}
+     */
+    private void setButton(final Button button, final int color, final String text) {
+        button.setBackgroundColor(color);
+        button.setClickable(color != RED);
+        button.setText(text);
     }
 
     /**
@@ -141,6 +153,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
                         .show();
             else {
                 new Handler().postDelayed(() -> {
+                    q = bank.getQuestion();
                     displayQuestion();
                     enabledClick = true;
                 }, 1000);
@@ -178,6 +191,12 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         outState.putParcelable(BUNDLE_STATE_QUESTION, q);
         outState.putStringArrayList(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST, bank.idsList());
         outState.putSerializable(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING, bank.idsString());
+        outState.putIntArray(BUNDLE_STATE_COLOR, new int[]{
+                ((ColorDrawable) answer1.getBackground()).getColor(),
+                ((ColorDrawable) answer2.getBackground()).getColor(),
+                ((ColorDrawable) answer3.getBackground()).getColor(),
+                ((ColorDrawable) answer4.getBackground()).getColor()
+        });
     }
 
     /**
@@ -196,5 +215,18 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         bank.idsString(
                 (StringBuilder) savedInstanceState
                         .getSerializable(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING));
+
+        question.setText(q.question());
+        answer1.setText(q.answer1());
+        answer2.setText(q.answer2());
+        answer3.setText(q.answer3());
+        answer4.setText(q.answer4());
+
+        final int[] colors = savedInstanceState.getIntArray(BUNDLE_STATE_COLOR);
+        assert colors != null;
+        answer1.setBackgroundColor(colors[0]);
+        answer2.setBackgroundColor(colors[1]);
+        answer3.setBackgroundColor(colors[2]);
+        answer4.setBackgroundColor(colors[3]);
     }
 }
