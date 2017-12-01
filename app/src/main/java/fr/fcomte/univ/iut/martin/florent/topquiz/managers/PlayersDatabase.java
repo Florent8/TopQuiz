@@ -8,23 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Player;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.PackagePrivate;
 
 import static java.util.Collections.sort;
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Gestion de la table {@value TABLE_PLAYERS} dans la base de données <br/>
  * Hérite de {@link Database}
  */
+@FieldDefaults(makeFinal = true, level = PRIVATE)
 public final class PlayersDatabase extends Database {
 
-    static final         String       TABLE_PLAYERS     = "players";
-    static final         String       KEY_NAME          = "name";
-    static final         String       KEY_SCORE         = "score";
-    private static final String[]     TAB_TABLE_PLAYERS = new String[]{TABLE_PLAYERS};
-    private static final byte         NB_SCORES         = 5;
-    private static final String       SQLITE_SEQUENCE   = "sqlite_sequence";
-    private static final String       WHERE_NAME        = "name = ?";
-    private final        List<Player> players           = new ArrayList<>();
+    @PackagePrivate static String   TABLE_PLAYERS     = "players";
+    @PackagePrivate static String   KEY_NAME          = "name";
+    @PackagePrivate static String   KEY_SCORE         = "score";
+    static                 String[] TAB_TABLE_PLAYERS = new String[]{TABLE_PLAYERS};
+    static                 byte     NB_SCORES         = 5;
+    static                 String   SQLITE_SEQUENCE   = "sqlite_sequence";
+    static                 String   WHERE_NAME        = "name = ?";
+    List<Player> players = new ArrayList<>();
 
     /**
      * Constructeur <br/>

@@ -12,27 +12,30 @@ import android.widget.TextView;
 
 import fr.fcomte.univ.iut.martin.florent.topquiz.managers.PlayersDatabase;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Player;
+import lombok.experimental.FieldDefaults;
 
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_input;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_text_view;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.start_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_main;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.views.GameActivity.BUNDLE_EXTRA_SCORE;
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Activité principale lancée au chargement de l'application <br/>
  * Hérite de {@link AppCompatActivity}
  */
+@FieldDefaults(level = PRIVATE)
 public final class MainActivity extends AppCompatActivity {
 
-    private static final byte          GAME_ACTIVITY_REQUEST_CODE = 1;
-    private static final String        PLAYER_PREFERENCE          = "player";
-    private static final String        SCORE_PREFERENCE           = "score";
-    private final        StringBuilder stringBuilder              = new StringBuilder();
-    private SharedPreferences preferences;
-    private Player            player;
-    private PlayersDatabase   playersDatabase;
-    private EditText          nameInput;
+    static final byte          GAME_ACTIVITY_REQUEST_CODE = 1;
+    static final String        PLAYER_PREFERENCE          = "player";
+    static final String        SCORE_PREFERENCE           = "score";
+    final        StringBuilder stringBuilder              = new StringBuilder();
+    SharedPreferences preferences;
+    Player            player;
+    PlayersDatabase   playersDatabase;
+    EditText          nameInput;
 
     /**
      * Initialisation des attributs de l'instance de {@link MainActivity} <br/>
@@ -74,7 +77,8 @@ public final class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(final CharSequence s, final int i, final int i1, final int i2) {
+            public void onTextChanged(final CharSequence s, final int i, final int i1, final int i2
+            ) {
                 button.setEnabled(s.length() != 0);
             }
 
@@ -94,7 +98,8 @@ public final class MainActivity extends AppCompatActivity {
      * @param data        {@link Intent}
      */
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data
+    ) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK)
             player.setScore(data.getByteExtra(BUNDLE_EXTRA_SCORE, (byte) 0));

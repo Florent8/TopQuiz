@@ -13,6 +13,7 @@ import android.widget.TextView;
 import fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
@@ -25,6 +26,7 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer3_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer4_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.question_text;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_game;
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Activité où se déroule le jeu <br/>
@@ -32,25 +34,26 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_game;
  * Hérite de {@link AppCompatActivity} <br/>
  * Implémente {@link Button.OnClickListener}
  */
+@FieldDefaults(level = PRIVATE)
 public final class GameActivity extends AppCompatActivity implements Button.OnClickListener {
 
-    public static final  String BUNDLE_EXTRA_SCORE    = "BUNDLE_EXTRA_SCORE";
-    private static final String BUNDLE_STATE_SCORE    = "currentScore";
-    private static final String BUNDLE_STATE_QUESTION = "currentQuestion";
-    private static final String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST
-                                                      = "precedentQuestionsIdsList";
-    private static final String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING
-                                                      = "precedentQuestionsIdsString";
-    private QuestionBank bank;
-    private byte numberOfQuestions = 1;
-    private byte score             = 0;
-    @Getter private Question q;
-    private         TextView question;
-    private         Button   answer1;
-    private         Button   answer2;
-    private         Button   answer3;
-    private         Button   answer4;
-    private boolean enabledClick = true;
+    public static final String BUNDLE_EXTRA_SCORE    = "BUNDLE_EXTRA_SCORE";
+    static final        String BUNDLE_STATE_SCORE    = "currentScore";
+    static final        String BUNDLE_STATE_QUESTION = "currentQuestion";
+    static final        String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST
+                                                     = "precedentQuestionsIdsList";
+    static final        String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING
+                                                     = "precedentQuestionsIdsString";
+    QuestionBank bank;
+    byte numberOfQuestions = 1;
+    byte score             = 0;
+    @Getter Question q;
+    TextView question;
+    Button   answer1;
+    Button   answer2;
+    Button   answer3;
+    Button   answer4;
+    boolean enabledClick = true;
 
     /**
      * Initialisation des attributs l'instance de {@link GameActivity} <br/>

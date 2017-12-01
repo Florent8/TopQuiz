@@ -13,29 +13,38 @@ import java.util.ArrayList;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
+import lombok.experimental.PackagePrivate;
+
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Gestion de la table {@value TABLE_QUESTIONS} dans la base de données <br/>
  * Hérite de {@link Database}
  */
+@FieldDefaults(makeFinal = true, level = PRIVATE)
 public final class QuestionBank extends Database {
 
-    static final         String TABLE_QUESTIONS     = "questions";
-    static final         String KEY_QUESTION        = "question";
-    static final         String KEY_ANSWER1         = "answer1";
-    static final         String KEY_ANSWER2         = "answer2";
-    static final         String KEY_ANSWER3         = "answer3";
-    static final         String KEY_ANSWER4         = "answer4";
-    static final         String KEY_GOOD_ANSWER     = "good_answer";
-    private static final String QUESTIONS_JSON_FILE = "questions.json";
-    private static final String RANDOM_ORDER_BY     = "random()";
-    private final Context context;
-    private final           String[]          columns   = new String[]{KEY_ID, KEY_QUESTION, KEY_ANSWER1,
-                                                                       KEY_ANSWER2, KEY_ANSWER3,
-                                                                       KEY_ANSWER4,
-                                                                       KEY_GOOD_ANSWER};
-    @Getter @Setter private ArrayList<String> idsList   = new ArrayList<>();
-    @Getter @Setter private StringBuilder     idsString = new StringBuilder();
+    @PackagePrivate static String TABLE_QUESTIONS     = "questions";
+    @PackagePrivate static String KEY_QUESTION        = "question";
+    @PackagePrivate static String KEY_ANSWER1         = "answer1";
+    @PackagePrivate static String KEY_ANSWER2         = "answer2";
+    @PackagePrivate static String KEY_ANSWER3         = "answer3";
+    @PackagePrivate static String KEY_ANSWER4         = "answer4";
+    @PackagePrivate static String KEY_GOOD_ANSWER     = "good_answer";
+    static                 String QUESTIONS_JSON_FILE = "questions.json";
+    static                 String RANDOM_ORDER_BY     = "random()";
+    Context context;
+    String[] columns = new String[]{KEY_ID,
+                                    KEY_QUESTION,
+                                    KEY_ANSWER1,
+                                    KEY_ANSWER2,
+                                    KEY_ANSWER3,
+                                    KEY_ANSWER4,
+                                    KEY_GOOD_ANSWER};
+    @NonFinal @Getter @Setter ArrayList<String> idsList   = new ArrayList<>();
+    @NonFinal @Getter @Setter StringBuilder     idsString = new StringBuilder();
 
     /**
      * Constructeur

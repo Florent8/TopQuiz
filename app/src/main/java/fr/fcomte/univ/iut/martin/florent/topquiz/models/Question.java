@@ -6,6 +6,10 @@ import android.os.Parcelable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
+
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Représentation d'une question en base de données <br/>
@@ -13,6 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @AllArgsConstructor
 @RequiredArgsConstructor
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 @Getter
 public final class Question implements Parcelable {
 
@@ -28,13 +33,13 @@ public final class Question implements Parcelable {
             return new Question[size];
         }
     };
-    private final String question;
-    private final String answer1;
-    private final String answer2;
-    private final String answer3;
-    private final String answer4;
-    private final byte   goodAnswer;
-    private byte score = 4;
+    String question;
+    String answer1;
+    String answer2;
+    String answer3;
+    String answer4;
+    byte   goodAnswer;
+    @NonFinal byte score = 4;
 
     /**
      * Constructeur pour {@link Parcelable}

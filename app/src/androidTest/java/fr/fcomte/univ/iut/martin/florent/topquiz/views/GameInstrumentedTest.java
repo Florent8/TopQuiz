@@ -9,6 +9,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import lombok.experimental.FieldDefaults;
+
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
 import static android.support.test.espresso.Espresso.onView;
@@ -25,11 +27,12 @@ import static org.junit.Assert.assertEquals;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@FieldDefaults(makeFinal = true)
 @RunWith(AndroidJUnit4.class)
 public final class GameInstrumentedTest {
 
     @Rule
-    public final ActivityTestRule<GameActivity> rule = new ActivityTestRule<>(GameActivity.class);
+    public ActivityTestRule<GameActivity> rule = new ActivityTestRule<>(GameActivity.class);
 
     /**
      * Test la couleur des boutons sur une question

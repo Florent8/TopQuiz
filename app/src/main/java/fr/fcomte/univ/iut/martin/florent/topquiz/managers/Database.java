@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.PackagePrivate;
+
 import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.PlayersDatabase.KEY_NAME;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.PlayersDatabase.KEY_SCORE;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.PlayersDatabase.TABLE_PLAYERS;
@@ -20,12 +23,13 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank.TA
  * Gère la base de données de l'application <br/>
  * Hérite de {@link SQLiteOpenHelper}
  */
+@FieldDefaults(makeFinal = true)
 abstract class Database extends SQLiteOpenHelper {
 
-    static final         String        KEY_ID           = "id";
-    private static final String        DATABASE_NAME    = "top_quiz_db";
-    private static final byte          DATABASE_VERSION = 1;
-    final                ContentValues values           = new ContentValues();
+    @PackagePrivate static String        KEY_ID           = "id";
+    private static         String        DATABASE_NAME    = "top_quiz_db";
+    private static         byte          DATABASE_VERSION = 1;
+    @PackagePrivate        ContentValues values           = new ContentValues();
 
     /**
      * Constructeur

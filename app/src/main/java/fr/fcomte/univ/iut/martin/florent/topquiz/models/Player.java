@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Représentation d'un joueur en base de données <br/>
@@ -13,11 +16,12 @@ import lombok.Setter;
  */
 @AllArgsConstructor
 @RequiredArgsConstructor
+@FieldDefaults(level = PRIVATE)
 @Getter
 public final class Player implements Comparable<Player> {
 
-    private final   String name;
-    @Setter private byte   score;
+    final   String name;
+    @Setter byte   score;
 
     /**
      * Compare le score de ce joueur à un autre
