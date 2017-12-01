@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.experimental.PackagePrivate;
@@ -23,6 +24,7 @@ import static lombok.AccessLevel.PRIVATE;
  * Gestion de la table {@value TABLE_QUESTIONS} dans la base de données <br/>
  * Hérite de {@link Database}
  */
+@Accessors(fluent = true)
 @FieldDefaults(makeFinal = true, level = PRIVATE)
 public final class QuestionBank extends Database {
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 import lombok.Getter;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
 import static android.graphics.Color.GREEN;
@@ -34,6 +35,7 @@ import static lombok.AccessLevel.PRIVATE;
  * Hérite de {@link AppCompatActivity} <br/>
  * Implémente {@link Button.OnClickListener}
  */
+@Accessors(fluent = true)
 @FieldDefaults(level = PRIVATE)
 public final class GameActivity extends AppCompatActivity implements Button.OnClickListener {
 
@@ -174,8 +176,8 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         super.onSaveInstanceState(outState);
         outState.putByte(BUNDLE_STATE_SCORE, score);
         outState.putParcelable(BUNDLE_STATE_QUESTION, q);
-        outState.putStringArrayList(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST, bank.getIdsList());
-        outState.putSerializable(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING, bank.getIdsString());
+        outState.putStringArrayList(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST, bank.idsList());
+        outState.putSerializable(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING, bank.idsString());
     }
 
     /**
@@ -189,9 +191,9 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         super.onRestoreInstanceState(savedInstanceState);
         score = savedInstanceState.getByte(BUNDLE_STATE_SCORE);
         q = savedInstanceState.getParcelable(BUNDLE_STATE_QUESTION);
-        bank.setIdsList(
+        bank.idsList(
                 savedInstanceState.getStringArrayList(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST));
-        bank.setIdsString(
+        bank.idsString(
                 (StringBuilder) savedInstanceState
                         .getSerializable(BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING));
     }

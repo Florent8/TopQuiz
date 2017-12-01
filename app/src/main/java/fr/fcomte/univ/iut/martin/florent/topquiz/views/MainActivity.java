@@ -61,7 +61,7 @@ public final class MainActivity extends AppCompatActivity {
         button.setEnabled(false);
         button.setOnClickListener(view -> {
             final String name = nameInput.getText().toString();
-            if (!player.getName().equals(name))
+            if (!player.name().equals(name))
                 player = new Player(name);
             startActivityForResult(new Intent(this, GameActivity.class),
                                    GAME_ACTIVITY_REQUEST_CODE
@@ -102,11 +102,11 @@ public final class MainActivity extends AppCompatActivity {
     ) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK)
-            player.setScore(data.getByteExtra(BUNDLE_EXTRA_SCORE, (byte) 0));
+            player.score(data.getByteExtra(BUNDLE_EXTRA_SCORE, (byte) 0));
         playersDatabase.setScores(player);
         preferences.edit()
-                   .putString(PLAYER_PREFERENCE, player.getName())
-                   .putInt(SCORE_PREFERENCE, player.getScore())
+                   .putString(PLAYER_PREFERENCE, player.name())
+                   .putInt(SCORE_PREFERENCE, player.score())
                    .apply();
         setPlayerMessage();
     }
@@ -116,13 +116,13 @@ public final class MainActivity extends AppCompatActivity {
      */
     private void setPlayerMessage() {
         stringBuilder.setLength(0);
-        if (!player.getName().equals("")) {
+        if (!player.name().equals("")) {
             ((TextView) findViewById(name_text_view)).setText(
-                    stringBuilder.append("Bonjour ").append(player.getName())
+                    stringBuilder.append("Bonjour ").append(player.name())
                                  .append(" ! Ravi de vous revoir.\nVotre précédent score était de ")
-                                 .append(player.getScore()).append(".").toString());
-            nameInput.setText(player.getName());
-            nameInput.setSelection(player.getName().length());
+                                 .append(player.score()).append(".").toString());
+            nameInput.setText(player.name());
+            nameInput.setSelection(player.name().length());
         }
     }
 }

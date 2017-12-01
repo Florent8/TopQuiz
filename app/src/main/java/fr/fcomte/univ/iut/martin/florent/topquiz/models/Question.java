@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 
@@ -15,6 +16,7 @@ import static lombok.AccessLevel.PRIVATE;
  * Représentation d'une question en base de données <br/>
  * Implémente {@link Parcelable}
  */
+@Accessors(fluent = true)
 @AllArgsConstructor
 @RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)

@@ -63,8 +63,8 @@ public final class PlayersDatabase extends Database {
 
         for (final Player p : players) {
             values.clear();
-            values.put(KEY_NAME, p.getName());
-            values.put(KEY_SCORE, p.getScore());
+            values.put(KEY_NAME, p.name());
+            values.put(KEY_SCORE, p.score());
             db.insert(TABLE_PLAYERS, null, values);
         }
 

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -14,6 +15,7 @@ import static lombok.AccessLevel.PRIVATE;
  * Représentation d'un joueur en base de données <br/>
  * Implémente {@link Comparable}
  */
+@Accessors(fluent = true)
 @AllArgsConstructor
 @RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE)
@@ -31,6 +33,6 @@ public final class Player implements Comparable<Player> {
      */
     @Override
     public int compareTo(@NonNull final Player player) {
-        return Byte.compare(score, player.getScore());
+        return Byte.compare(score, player.score());
     }
 }

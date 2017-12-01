@@ -42,7 +42,7 @@ public final class GameInstrumentedTest {
     @Test
     public void answer() {
         final GameActivity activity = rule.getActivity();
-        final byte goodAnswer = activity.getQ().getGoodAnswer();
+        final byte goodAnswer = activity.q().getGoodAnswer();
 
         onView(withId(answer1_btn)).perform(click());
         assertEquals(goodAnswer == 1 ? GREEN : RED,
