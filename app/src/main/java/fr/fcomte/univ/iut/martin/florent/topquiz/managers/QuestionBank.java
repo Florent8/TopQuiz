@@ -81,12 +81,12 @@ public final class QuestionBank extends Database {
 
         for (final Question question : questions) {
             values.clear();
-            values.put(KEY_QUESTION, question.getQuestion());
-            values.put(KEY_ANSWER1, question.getAnswer1());
-            values.put(KEY_ANSWER2, question.getAnswer2());
-            values.put(KEY_ANSWER3, question.getAnswer3());
-            values.put(KEY_ANSWER4, question.getAnswer4());
-            values.put(KEY_GOOD_ANSWER, question.getGoodAnswer());
+            values.put(KEY_QUESTION, question.question());
+            values.put(KEY_ANSWER1, question.answer1());
+            values.put(KEY_ANSWER2, question.answer2());
+            values.put(KEY_ANSWER3, question.answer3());
+            values.put(KEY_ANSWER4, question.answer4());
+            values.put(KEY_GOOD_ANSWER, question.goodAnswer());
             db.insert(TABLE_QUESTIONS, null, values);
         }
     }

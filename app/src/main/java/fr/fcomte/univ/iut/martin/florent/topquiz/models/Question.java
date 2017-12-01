@@ -59,7 +59,7 @@ public final class Question implements Parcelable {
      *
      * @return {@link Question#goodAnswer}
      */
-    public byte getGoodAnswer() {
+    public byte goodAnswer() {
         score--;
         return goodAnswer;
     }

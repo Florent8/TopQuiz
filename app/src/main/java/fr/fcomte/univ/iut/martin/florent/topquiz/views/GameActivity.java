@@ -91,22 +91,22 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      */
     private void displayQuestion() {
         this.q = bank.getQuestion();
-        question.setText(q.getQuestion());
+        question.setText(q.question());
 
         answer1.setBackgroundColor(WHITE);
         answer1.setClickable(true);
-        answer1.setText(q.getAnswer1());
+        answer1.setText(q.answer1());
 
         answer2.setBackgroundColor(WHITE);
         answer2.setClickable(true);
-        answer2.setText(q.getAnswer2());
+        answer2.setText(q.answer2());
 
         answer3.setBackgroundColor(WHITE);
         answer3.setClickable(true);
-        answer3.setText(q.getAnswer3());
+        answer3.setText(q.answer3());
 
         answer4.setBackgroundColor(WHITE);
-        answer4.setText(q.getAnswer4());
+        answer4.setText(q.answer4());
         answer4.setClickable(true);
     }
 
@@ -124,11 +124,11 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      */
     @Override
     public void onClick(final View view) {
-        if (Byte.parseByte(view.getTag().toString()) == q.getGoodAnswer()) {
+        if (Byte.parseByte(view.getTag().toString()) == q.goodAnswer()) {
             enabledClick = false;
             view.setBackgroundColor(GREEN);
             makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
-            score += q.getScore();
+            score += q.score();
             if (--numberOfQuestions == 0)
                 new AlertDialog.Builder(this)
                         .setTitle("Jeu terminé")
