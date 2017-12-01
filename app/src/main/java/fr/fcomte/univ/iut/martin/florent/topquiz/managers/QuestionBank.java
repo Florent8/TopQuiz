@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Question;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
@@ -65,19 +66,16 @@ public final class QuestionBank extends Database {
      *
      * @param db {@link SQLiteDatabase}
      */
+    @SneakyThrows(IOException.class)
     @Override
     public void onCreate(final SQLiteDatabase db) {
         super.onCreate(db);
 
         Question[] questions;
-        try {
-            questions = new Gson().fromJson(
-                    new InputStreamReader(context.getAssets().open(QUESTIONS_JSON_FILE)),
-                    Question[].class
-            );
-        } catch (final IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        questions = new Gson().fromJson(
+                new InputStreamReader(context.getAssets().open(QUESTIONS_JSON_FILE)),
+                Question[].class
+        );
 
         for (final Question question : questions) {
             values.clear();
