@@ -13,17 +13,16 @@ import lombok.experimental.NonFinal;
 import static lombok.AccessLevel.PRIVATE;
 
 /**
- * Représentation d'une question en base de données <br/>
- * Implémente {@link Parcelable}
+ * Représentation d'une question en base de données
  */
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 @Accessors(fluent = true)
+@Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@FieldDefaults(level = PRIVATE, makeFinal = true)
-@Getter
 public final class Question implements Parcelable {
 
-    public static final Creator<Question> CREATOR = new Creator<Question>() {
+    public static Creator<Question> CREATOR = new Creator<Question>() {
 
         @Override
         public Question createFromParcel(final Parcel in) {
@@ -46,7 +45,7 @@ public final class Question implements Parcelable {
     /**
      * Constructeur pour {@link Parcelable}
      *
-     * @param in {@link Parcel}
+     * @param in parcel
      */
     private Question(final Parcel in) {
         this(in.readString(), in.readString(), in.readString(), in.readString(), in.readString(),
@@ -72,7 +71,7 @@ public final class Question implements Parcelable {
     /**
      * Écris les données à sauvegarder lors d'une « parcelisation »
      *
-     * @param parcel {@link Parcel}
+     * @param parcel parcel
      * @param i      flags
      */
     @Override
