@@ -32,12 +32,10 @@ import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Activité où se déroule le jeu <br/>
- * Générée depuis {@link MainActivity}, elle lui retournera le score du joueur lorsque'elle se terminera <br/>
- * Hérite de {@link AppCompatActivity} <br/>
- * Implémente {@link Button.OnClickListener}
+ * Générée depuis {@link MainActivity}, elle lui retournera le score du joueur lorsque'elle se terminera
  */
-@Accessors(fluent = true)
 @FieldDefaults(level = PRIVATE)
+@Accessors(fluent = true)
 public final class GameActivity extends AppCompatActivity implements Button.OnClickListener {
 
     public static final String BUNDLE_EXTRA_SCORE    = "BUNDLE_EXTRA_SCORE";
@@ -63,7 +61,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * Initialisation des attributs l'instance de {@link GameActivity} <br/>
      * Affichage de la première question
      *
-     * @param savedInstanceState {@link Bundle}
+     * @param savedInstanceState bundle
      * @see QuestionBank#getQuestion()
      */
     @Override
@@ -102,8 +100,9 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
     /**
      * Création de la vue d'un bouton de réponse à la création d'une question
      *
-     * @param button {@link Button}
-     * @param text   {@link String}
+     * @param button bouton
+     * @param text   réponse
+     * @see GameActivity#setButton(Button, int, String)
      */
     private void setButtonDefault(final Button button, final String text) {
         setButton(button, WHITE, text);
@@ -112,9 +111,9 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
     /**
      * Création de la vue d'un bouton de réponse
      *
-     * @param button {@link Button}
-     * @param color  {@link android.graphics.Color}
-     * @param text   {@link String}
+     * @param button bouton
+     * @param color  couleur du bouton
+     * @param text   réponse
      */
     private void setButton(final Button button, final int color, final String text) {
         button.setBackgroundColor(color);
@@ -131,8 +130,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * <li>fin de l'activité, retour du score à {@link MainActivity}.</li>
      * </ul>
      *
-     * @param view {@link View}
-     * @see QuestionBank#getQuestion()
+     * @param view bouton-réponse cliqué
      */
     @Override
     public void onClick(final View view) {
@@ -170,7 +168,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * Quand le message indiquant au joueur qu'il a trouvé la bonne réponse est affiché, on
      * doit désactiver les clics.
      *
-     * @param ev {@link MotionEvent}
+     * @param ev événement de clic
      * @return si le clic est autorisé ou non
      */
     @Override
@@ -182,7 +180,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * Sauvegarde le score,la question courante et les questions déjà posées
      * lors d'une destruction de l'activité
      *
-     * @param outState {@link Bundle}
+     * @param outState bundle
      */
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
@@ -202,7 +200,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
     /**
      * Restaure les valeurs sauvegardées à la destruction de l'activité
      *
-     * @param savedInstanceState {@link Bundle}
+     * @param savedInstanceState bundle
      * @see GameActivity#onSaveInstanceState(Bundle)
      */
     @Override

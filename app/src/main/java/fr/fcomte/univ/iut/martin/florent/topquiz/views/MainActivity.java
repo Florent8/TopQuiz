@@ -13,6 +13,7 @@ import android.widget.TextView;
 import fr.fcomte.univ.iut.martin.florent.topquiz.managers.PlayersDatabase;
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Player;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_input;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_text_view;
@@ -22,27 +23,26 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.views.GameActivity.BUNDL
 import static lombok.AccessLevel.PRIVATE;
 
 /**
- * Activité principale lancée au chargement de l'application <br/>
- * Hérite de {@link AppCompatActivity}
+ * Activité principale lancée au chargement de l'application
  */
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 public final class MainActivity extends AppCompatActivity {
 
-    static final byte          GAME_ACTIVITY_REQUEST_CODE = 1;
-    static final String        PLAYER_PREFERENCE          = "player";
-    static final String        SCORE_PREFERENCE           = "score";
-    final        StringBuilder stringBuilder              = new StringBuilder();
-    SharedPreferences preferences;
-    Player            player;
-    PlayersDatabase   playersDatabase;
-    EditText          nameInput;
+    static byte   GAME_ACTIVITY_REQUEST_CODE = 1;
+    static String PLAYER_PREFERENCE          = "player";
+    static String SCORE_PREFERENCE           = "score";
+    StringBuilder stringBuilder = new StringBuilder();
+    @NonFinal SharedPreferences preferences;
+    @NonFinal Player            player;
+    @NonFinal PlayersDatabase   playersDatabase;
+    @NonFinal EditText          nameInput;
 
     /**
      * Initialisation des attributs de l'instance de {@link MainActivity} <br/>
      * Gestion de la récupération du nom du joueur <br/>
      * Bouton de lancement d'une instance de {@link GameActivity}
      *
-     * @param savedInstanceState {@link Bundle}
+     * @param savedInstanceState bundle
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public final class MainActivity extends AppCompatActivity {
      *
      * @param requestCode code de la requête
      * @param resultCode  {@value GAME_ACTIVITY_REQUEST_CODE}
-     * @param data        {@link Intent}
+     * @param data        intent
      */
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data

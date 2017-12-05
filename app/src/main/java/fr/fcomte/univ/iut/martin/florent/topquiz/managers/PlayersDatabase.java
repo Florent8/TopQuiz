@@ -5,21 +5,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import fr.fcomte.univ.iut.martin.florent.topquiz.models.Player;
-import lombok.experimental.ExtensionMethod;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.PackagePrivate;
 
+import static java.util.Collections.sort;
 import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Gestion de la table {@value TABLE_PLAYERS} dans la base de données
  */
 @FieldDefaults(level = PRIVATE, makeFinal = true)
-@ExtensionMethod(Collections.class)
 public final class PlayersDatabase extends Database {
 
     @PackagePrivate static String TABLE_PLAYERS = "players";
@@ -50,7 +48,7 @@ public final class PlayersDatabase extends Database {
     public void setScores(final Player player) {
         final List<Player> players = getPlayers();
         players.add(player);
-        players.sort();
+        sort(players);
         while (players.size() > NB_SCORES)
             players.remove(players.size() - 1);
         final SQLiteDatabase db = getWritableDatabase();
