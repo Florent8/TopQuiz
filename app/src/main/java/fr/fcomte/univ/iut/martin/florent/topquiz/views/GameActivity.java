@@ -17,11 +17,11 @@ import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
-import static android.graphics.Color.GREEN;
+import static android.graphics.Color.BLACK;
 import static android.graphics.Color.RED;
-import static android.graphics.Color.WHITE;
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
+import static fr.fcomte.univ.iut.martin.florent.topquiz.R.color.buttonGoodAnswer;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer1_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer2_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer3_btn;
@@ -105,7 +105,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * @see GameActivity#setButton(Button, int, String)
      */
     private void setButtonDefault(final Button button, final String text) {
-        setButton(button, WHITE, text);
+        setButton(button, BLACK, text);
     }
 
     /**
@@ -136,7 +136,7 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
     public void onClick(final View view) {
         if (Byte.parseByte(view.getTag().toString()) == q.goodAnswer()) {
             enabledClick = false;
-            view.setBackgroundColor(GREEN);
+            view.setBackgroundColor(getResources().getColor(buttonGoodAnswer));
             makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
             score += q.score();
             if (--numberOfQuestions == 0)

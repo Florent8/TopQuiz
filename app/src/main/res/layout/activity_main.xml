@@ -34,4 +34,13 @@
         android:padding="30dp"
         android:text="@string/start_button" />
 
+    <Button
+        android:id="@+id/scores_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:padding="30dp"
+        android:text="@string/scores_button" />
+
 </LinearLayout>

@@ -2,5 +2,7 @@
     <string name="app_name">TopQuiz</string>
     <string name="welcome_text">Bienvenue dans TopQuiz !\nQuel est votre prénom ?</string>
     <string name="name_edit_text">Entrez votre prénom.</string>
-    <string name="start_button">Commencez</string>
+    <string name="start_button">Commencer</string>
+    <string name="scores_button">Scores</string>
+    <string name="menu_button">Menu</string>
 </resources>

@@ -17,6 +17,7 @@ import lombok.experimental.NonFinal;
 
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_input;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.name_text_view;
+import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.scores_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.start_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.layout.activity_main;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.views.GameActivity.BUNDLE_EXTRA_SCORE;
@@ -40,7 +41,8 @@ public final class MainActivity extends AppCompatActivity {
     /**
      * Initialisation des attributs de l'instance de {@link MainActivity} <br/>
      * Gestion de la récupération du nom du joueur <br/>
-     * Bouton de lancement d'une instance de {@link GameActivity}
+     * Bouton de lancement d'une instance de {@link GameActivity} <br/>
+     * Bouton de lancement d'une instance de {@link ScoreActivity}
      *
      * @param savedInstanceState bundle
      */
@@ -86,6 +88,9 @@ public final class MainActivity extends AppCompatActivity {
             public void afterTextChanged(final Editable editable) {
             }
         });
+
+        findViewById(scores_btn)
+                .setOnClickListener(view -> startActivity(new Intent(this, ScoreActivity.class)));
 
         setPlayerMessage();
     }
