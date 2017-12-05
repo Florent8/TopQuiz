@@ -47,8 +47,8 @@ public final class QuestionBank extends Database {
                                     KEY_ANSWER3,
                                     KEY_ANSWER4,
                                     KEY_GOOD_ANSWER};
-    @NonFinal @Getter @Setter ArrayList<String> idsList   = new ArrayList<>();
-    @NonFinal @Getter @Setter StringBuilder     idsString = new StringBuilder();
+    @Getter @Setter @NonFinal ArrayList<String> idsList   = new ArrayList<>();
+    @Getter @Setter @NonFinal StringBuilder     idsString = new StringBuilder();
 
     /**
      * Constructeur
