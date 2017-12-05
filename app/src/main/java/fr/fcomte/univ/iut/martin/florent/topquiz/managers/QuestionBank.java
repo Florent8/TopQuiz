@@ -1,5 +1,6 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,11 +23,10 @@ import lombok.experimental.PackagePrivate;
 import static lombok.AccessLevel.PRIVATE;
 
 /**
- * Gestion de la table {@value TABLE_QUESTIONS} dans la base de données <br/>
- * Hérite de {@link Database}
+ * Gestion de la table {@value TABLE_QUESTIONS} dans la base de données
  */
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 @Accessors(fluent = true)
-@FieldDefaults(makeFinal = true, level = PRIVATE)
 public final class QuestionBank extends Database {
 
     @PackagePrivate static String TABLE_QUESTIONS     = "questions";
@@ -38,6 +38,7 @@ public final class QuestionBank extends Database {
     @PackagePrivate static String KEY_GOOD_ANSWER     = "good_answer";
     static                 String QUESTIONS_JSON_FILE = "questions.json";
     static                 String RANDOM_ORDER_BY     = "random()";
+    ContentValues values = new ContentValues();
     Context context;
     String[] columns = new String[]{KEY_ID,
                                     KEY_QUESTION,
@@ -52,7 +53,7 @@ public final class QuestionBank extends Database {
     /**
      * Constructeur
      *
-     * @param context {@link Context}
+     * @param context activité où est instanciée la classe
      * @see Database#Database(Context)
      */
     public QuestionBank(final Context context) {
@@ -64,15 +65,14 @@ public final class QuestionBank extends Database {
      * Après la création des tables, initialise les différentes questions stockées au format json
      * dans le fichier {@value QUESTIONS_JSON_FILE}
      *
-     * @param db {@link SQLiteDatabase}
+     * @param db database
      */
     @SneakyThrows(IOException.class)
     @Override
     public void onCreate(final SQLiteDatabase db) {
         super.onCreate(db);
 
-        Question[] questions;
-        questions = new Gson().fromJson(
+        final Question[] questions = new Gson().fromJson(
                 new InputStreamReader(context.getAssets().open(QUESTIONS_JSON_FILE)),
                 Question[].class
         );
@@ -90,9 +90,7 @@ public final class QuestionBank extends Database {
     }
 
     /**
-     * Retourne une question sélectionnée au hasard dans la base et qui n'est pas déjà sortie
-     *
-     * @return {@link Question}
+     * @return question sélectionnée au hasard dans la base et qui n'est pas déjà sortie
      */
     public Question getQuestion() {
         final SQLiteDatabase db = getReadableDatabase();

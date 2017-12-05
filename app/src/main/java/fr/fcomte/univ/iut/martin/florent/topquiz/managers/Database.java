@@ -1,6 +1,5 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.managers;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -18,23 +17,22 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank.KE
 import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank.KEY_GOOD_ANSWER;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank.KEY_QUESTION;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.managers.QuestionBank.TABLE_QUESTIONS;
+import static lombok.AccessLevel.PRIVATE;
 
 /**
- * Gère la base de données de l'application <br/>
- * Hérite de {@link SQLiteOpenHelper}
+ * Gère la base de données de l'application
  */
-@FieldDefaults(makeFinal = true)
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 abstract class Database extends SQLiteOpenHelper {
 
-    @PackagePrivate static String        KEY_ID           = "id";
-    private static         String        DATABASE_NAME    = "top_quiz_db";
-    private static         byte          DATABASE_VERSION = 1;
-    @PackagePrivate        ContentValues values           = new ContentValues();
+    @PackagePrivate static String KEY_ID           = "id";
+    static                 String DATABASE_NAME    = "top_quiz_db";
+    static                 byte   DATABASE_VERSION = 1;
 
     /**
      * Constructeur
      *
-     * @param context {@link Context}
+     * @param context activité où est instanciée la classe
      */
     Database(final Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +45,7 @@ abstract class Database extends SQLiteOpenHelper {
      * <li>{@link PlayersDatabase#TABLE_PLAYERS}</li>
      * </ul>
      *
-     * @param db {@link SQLiteDatabase}
+     * @param db database
      */
     @Override
     public void onCreate(final SQLiteDatabase db) {
@@ -61,8 +59,7 @@ abstract class Database extends SQLiteOpenHelper {
                    + KEY_GOOD_ANSWER + " INTEGER NOT NULL)");
 
         db.execSQL("CREATE TABLE " + TABLE_PLAYERS + "("
-                   + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                   + KEY_NAME + " TEXT NOT NULL,"
+                   + KEY_NAME + " TEXT PRIMARY KEY,"
                    + KEY_SCORE + " INTEGER NOT NULL)");
     }
 
