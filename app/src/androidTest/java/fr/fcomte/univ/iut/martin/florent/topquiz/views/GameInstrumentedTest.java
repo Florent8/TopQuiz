@@ -11,11 +11,11 @@ import org.junit.runner.RunWith;
 
 import lombok.experimental.FieldDefaults;
 
-import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static fr.fcomte.univ.iut.martin.florent.topquiz.R.color.buttonGoodAnswer;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer1_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer2_btn;
 import static fr.fcomte.univ.iut.martin.florent.topquiz.R.id.answer3_btn;
@@ -45,23 +45,30 @@ public final class GameInstrumentedTest {
         final byte goodAnswer = activity.q().goodAnswer();
 
         onView(withId(answer1_btn)).perform(click());
-        assertEquals(goodAnswer == 1 ? GREEN : RED,
+        assertEquals(goodAnswer == 1 ? activity.getResources().getColor(buttonGoodAnswer) : RED,
                      ((ColorDrawable) activity.findViewById(answer1_btn).getBackground()).getColor()
         );
 
-        onView(withId(answer2_btn)).perform(click());
-        assertEquals(goodAnswer == 2 ? GREEN : RED,
-                     ((ColorDrawable) activity.findViewById(answer2_btn).getBackground()).getColor()
-        );
+        if (goodAnswer != 1) {
+            onView(withId(answer2_btn)).perform(click());
+            assertEquals(goodAnswer == 2 ? activity.getResources().getColor(buttonGoodAnswer) : RED,
+                         ((ColorDrawable) activity.findViewById(answer2_btn).getBackground()).getColor()
+            );
 
-        onView(withId(answer3_btn)).perform(click());
-        assertEquals(goodAnswer == 3 ? GREEN : RED,
-                     ((ColorDrawable) activity.findViewById(answer3_btn).getBackground()).getColor()
-        );
+            if (goodAnswer != 2) {
+                onView(withId(answer3_btn)).perform(click());
+                assertEquals(goodAnswer == 3 ? activity.getResources().getColor(buttonGoodAnswer) : RED,
+                             ((ColorDrawable) activity.findViewById(answer3_btn).getBackground()).getColor()
+                );
 
-        onView(withId(answer4_btn)).perform(click());
-        assertEquals(goodAnswer == 4 ? GREEN : RED,
-                     ((ColorDrawable) activity.findViewById(answer4_btn).getBackground()).getColor()
-        );
+                if (goodAnswer != 3) {
+                    onView(withId(answer4_btn)).perform(click());
+                    assertEquals(goodAnswer == 4 ? activity.getResources().getColor(buttonGoodAnswer) : RED,
+                                 ((ColorDrawable) activity.findViewById(answer4_btn).getBackground())
+                                         .getColor()
+                    );
+                }
+            }
+        }
     }
 }

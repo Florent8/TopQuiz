@@ -55,12 +55,9 @@ public final class Question implements Parcelable {
 
     /**
      * Réduit de 1 {@link Question#score} avant de retourner la bonne réponse
-     *
-     * @return {@link Question#goodAnswer}
      */
-    public byte goodAnswer() {
+    public void decrementsScore() {
         score--;
-        return goodAnswer;
     }
 
     @Override

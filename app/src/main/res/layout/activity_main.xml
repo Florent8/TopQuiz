@@ -39,6 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/button_layout_marginTop"
-        android:text="@string/scores_button" />
+        android:text="@string/scores" />
 
 </LinearLayout>

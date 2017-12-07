@@ -59,7 +59,7 @@
             <TextView
                 android:gravity="right"
                 android:padding="@dimen/textview_table_padding"
-                android:text="@string/scores_button"
+                android:text="@string/scores"
                 tools:ignore="RtlHardcoded" />
         </TableRow>
     </TableLayout>

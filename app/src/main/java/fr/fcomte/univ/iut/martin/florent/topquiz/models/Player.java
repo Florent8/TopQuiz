@@ -35,13 +35,13 @@ public final class Player implements Comparable<Player> {
      */
     @Override
     public int compareTo(@NonNull final Player player) {
-        return Byte.compare(score, player.score());
+        return Byte.compare(player.score(), score);
     }
 
     /**
      * Comparator pour les noms des joueurs
      */
-    public static class PlayerNameComparator implements Comparator<Player> {
+    public static final class PlayerNameComparator implements Comparator<Player> {
 
         /**
          * Trie {@link Player#name} par ordre alphabétique

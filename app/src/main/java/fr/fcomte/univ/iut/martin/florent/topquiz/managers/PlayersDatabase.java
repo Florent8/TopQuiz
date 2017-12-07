@@ -11,6 +11,7 @@ import fr.fcomte.univ.iut.martin.florent.topquiz.models.Player;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.PackagePrivate;
 
+import static java.util.Collections.reverse;
 import static java.util.Collections.sort;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -49,15 +50,16 @@ public final class PlayersDatabase extends Database {
         final List<Player> players = getPlayers();
         players.add(player);
         sort(players);
+        reverse(players);
         while (players.size() > NB_SCORES)
             players.remove(players.size() - 1);
         final SQLiteDatabase db = getWritableDatabase();
-        for (final Player p : players)
-            db.execSQL(
-                    "INSERT OR REPLACE INTO " + TABLE_PLAYERS + "(" + KEY_NAME + "," + KEY_SCORE +
-                    ")VALUES (:name, :score)",
-                    new Object[]{p.name(), p.score()}
-            );
+        for (final Player p : players) {
+            values.clear();
+            values.put(KEY_NAME, p.name());
+            values.put(KEY_SCORE, p.score());
+            db.replace(TABLE_PLAYERS, null, values);
+        }
         db.close();
     }
 

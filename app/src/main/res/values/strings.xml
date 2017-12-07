@@ -4,7 +4,7 @@
     <string name="welcome_text">Bienvenue dans TopQuiz !\nQuel est votre prénom ?</string>
     <string name="name_edit_text">Entrez votre prénom.</string>
     <string name="start_button">Commencer</string>
-    <string name="scores_button">Scores</string>
+    <string name="scores">Scores</string>
     <string name="menu_button">Menu</string>
     <string name="table_noms">Noms</string>
     <string name="sort_name">Trier par nom</string>

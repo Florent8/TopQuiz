@@ -1,6 +1,5 @@
 package fr.fcomte.univ.iut.martin.florent.topquiz.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -13,15 +12,18 @@ import static fr.fcomte.univ.iut.martin.florent.topquiz.R.dimen.textview_table_p
 import static lombok.AccessLevel.PRIVATE;
 
 @FieldDefaults(level = PRIVATE, makeFinal = true)
-@SuppressLint("ViewConstructor")
 public final class ScoreTableRow extends TableRow {
 
     int dim = getResources().getDimensionPixelSize(textview_table_padding);
     Context context;
 
-    public ScoreTableRow(final Context context, final String name, final byte score) {
+    private ScoreTableRow(final Context context) {
         super(context);
         this.context = context;
+    }
+
+    public ScoreTableRow(final Context context, final String name, final byte score) {
+        this(context);
         addTextView(name, START);
         addTextView(Byte.toString(score), END);
     }

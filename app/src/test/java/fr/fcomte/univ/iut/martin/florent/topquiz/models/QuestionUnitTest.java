@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 import static org.junit.Assert.assertNotNull;
 
-public class QuestionUnitTest {
+public final class QuestionUnitTest {
 
     @Test
     public void testQuestionsFromJSON() throws IOException {

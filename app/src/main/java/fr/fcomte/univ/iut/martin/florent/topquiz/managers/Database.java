@@ -33,11 +33,11 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 abstract class Database extends SQLiteOpenHelper {
 
-    @PackagePrivate static String KEY_ID              = "id";
-    static                 String DATABASE_NAME       = "top_quiz_db";
-    static                 byte   DATABASE_VERSION    = 1;
-    static                 String QUESTIONS_JSON_FILE = "questions.json";
-    ContentValues values = new ContentValues();
+    @PackagePrivate static String        KEY_ID              = "id";
+    static                 String        DATABASE_NAME       = "top_quiz_db";
+    static                 byte          DATABASE_VERSION    = 1;
+    static                 String        QUESTIONS_JSON_FILE = "questions.json";
+    @PackagePrivate        ContentValues values              = new ContentValues();
     Context context;
 
     /**

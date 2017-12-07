@@ -40,7 +40,7 @@
     "goodAnswer": 1
   },
   {
-    "question": "En quelle année est sorti Mario Bros. ?",
+    "question": "En quelle année est sorti « Mario Bros. » ?",
     "answer1": 1980,
     "answer2": 1983,
     "answer3": 1985,
@@ -56,7 +56,7 @@
     "goodAnswer": 3
   },
   {
-    "question": "Quel est le rang de Maes Hughes (Fullmetal Alchemist) qu'il a acquis après sa mort ?",
+    "question": "Quel est le rang de Maes Hughes (« Fullmetal Alchemist ») qu'il a acquis après sa mort ?",
     "answer1": "Lieutenant",
     "answer2": "Colonel",
     "answer3": "Lieutenant-colonel",
@@ -64,7 +64,7 @@
     "goodAnswer": 4
   },
   {
-    "question": "Comment se prénomme le dragon présent dans le Sacred Gear d'Issei Hyoudou (Highschool DxD) ?",
+    "question": "Comment se prénomme le dragon présent dans le Sacred Gear d'Issei Hyoudou (« Highschool DxD» ) ?",
     "answer1": "Albion",
     "answer2": "Valper",
     "answer3": "Ddraig",
@@ -78,5 +78,85 @@
     "answer3": 1000,
     "answer4": "π",
     "goodAnswer": 1
+  },
+  {
+    "question": "Si c'est très étroit, combien ça fait ?",
+    "answer1": 36,
+    "answer2": 42,
+    "answer3": 22,
+    "answer4": 18,
+    "goodAnswer": 3
+  },
+  {
+    "question": "Quand a été enregistré « Du riechst so gut » du groupe Rammstein ?",
+    "answer1": 1994,
+    "answer2": 1995,
+    "answer3": 1996,
+    "answer4": "hier",
+    "goodAnswer": 2
+  },
+  {
+    "question": "Quel type de kemonomimi ont des oreilles de chat ?",
+    "answer1": "Usagimimi",
+    "answer2": "Inumimi",
+    "answer3": "Kitsunemimi",
+    "answer4": "Nekomimi",
+    "goodAnswer": 4
+  },
+  {
+    "question": "Sauf une fois au...",
+    "answer1": "chalet",
+    "answer2": "marais",
+    "answer3": "château",
+    "answer4": "carnaval de Rio",
+    "goodAnswer": 1
+  },
+  {
+    "question": "La bonne orthographe est",
+    "answer1": "schmilblique",
+    "answer2": "schmilblic",
+    "answer3": "schmilblick",
+    "answer4": "schilblik",
+    "goodAnswer": 2
+  },
+  {
+    "question": "Et Psykokwak il dit quoi ?",
+    "answer1": "Psykokwak",
+    "answer2": "Pikachu",
+    "answer3": "Nyan",
+    "answer4": "Aucune idée.",
+    "goodAnswer": 4
+  },
+  {
+    "question": "Elle [?] du vieux pain sur son balcon",
+    "answer1": "met",
+    "answer2": "mettait",
+    "answer3": "a mis",
+    "answer4": "avait mettez",
+    "goodAnswer": 1
+  },
+  {
+    "question": "ax² + bx + c =",
+    "answer1": "a(x − α)² + β",
+    "answer2": "a(x − α)² - β",
+    "answer3": "a(x + α)² + β",
+    "answer4": "a(x + α)² - β",
+    "goodAnswer": 1
+  },
+  {
+    "question": "Qui a réalisé « L'Étrange Noël de monsieur Jack » ?",
+    "answer1": "Steven Spielberg",
+    "answer2": "Tim Burton",
+    "answer3": "Caius Bonus",
+    "answer4": "Henry Selick",
+    "goodAnswer": 4
+  },
+  {
+    "question": "Nous partîmes combien ?",
+    "answer1": 200,
+    "answer2": 500,
+    "answer3": 600,
+    "answer4": 800,
+    "goodAnswer": 2
   }
 ]

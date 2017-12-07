@@ -38,16 +38,18 @@ import static lombok.AccessLevel.PRIVATE;
 @Accessors(fluent = true)
 public final class GameActivity extends AppCompatActivity implements Button.OnClickListener {
 
-    public static final String BUNDLE_EXTRA_SCORE    = "BUNDLE_EXTRA_SCORE";
-    static final        String BUNDLE_STATE_SCORE    = "currentScore";
-    static final        String BUNDLE_STATE_QUESTION = "currentQuestion";
-    static final        String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST
-                                                     = "precedentQuestionsIdsList";
-    static final        String BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING
-                                                     = "precedentQuestionsIdsString";
-    static final        String BUNDLE_STATE_COLOR    = "answersButtonColor";
+    public static final String                 BUNDLE_EXTRA_SCORE    = "BUNDLE_EXTRA_SCORE";
+    static final        String                 BUNDLE_STATE_SCORE    = "currentScore";
+    static final        String                 BUNDLE_STATE_QUESTION = "currentQuestion";
+    static final        String                 BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_LIST
+                                                                     = "precedentQuestionsIdsList";
+    static final        String                 BUNDLE_STATE_PRECEDENT_QUESTIONS_IDS_STRING
+                                                                     = "precedentQuestionsIdsString";
+    static final        String                 BUNDLE_STATE_COLOR    = "answersButtonColor";
+    final               BadAnswerClickListener badAnswerClickListener
+                                                                     = new BadAnswerClickListener();
     QuestionBank bank;
-    byte numberOfQuestions = 1;
+    byte numberOfQuestions = 10;
     byte score             = 0;
     @Getter Question q;
     TextView question;
@@ -73,13 +75,9 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
 
         question = findViewById(question_text);
         answer1 = findViewById(answer1_btn);
-        answer1.setOnClickListener(this);
         answer2 = findViewById(answer2_btn);
-        answer2.setOnClickListener(this);
         answer3 = findViewById(answer3_btn);
-        answer3.setOnClickListener(this);
         answer4 = findViewById(answer4_btn);
-        answer4.setOnClickListener(this);
 
         q = bank.getQuestion();
         displayQuestion();
@@ -116,15 +114,15 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      * @param text   réponse
      */
     private void setButton(final Button button, final int color, final String text) {
+        button.setOnClickListener(
+                Byte.parseByte(button.getTag().toString()) == q.goodAnswer() ? this : badAnswerClickListener);
         button.setBackgroundColor(color);
         button.setClickable(color != RED);
         button.setText(text);
     }
 
     /**
-     * Gestion de l'appui sur une réponse <br/>
-     * Vérifie si la réponse sélectionnée est correcte ou non <br/>
-     * Si la réponse est correcte, deux cas possibles :
+     * Gestion de l'appui sur une bonne réponse, deux cas possibles :
      * <ul>
      * <li>affichage de la question suivante (sélectionnée aléatoirement) ;</li>
      * <li>fin de l'activité, retour du score à {@link MainActivity}.</li>
@@ -134,32 +132,27 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
      */
     @Override
     public void onClick(final View view) {
-        if (Byte.parseByte(view.getTag().toString()) == q.goodAnswer()) {
-            enabledClick = false;
-            view.setBackgroundColor(getResources().getColor(buttonGoodAnswer));
-            makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
-            score += q.score();
-            if (--numberOfQuestions == 0)
-                new AlertDialog.Builder(this)
-                        .setTitle("Jeu terminé")
-                        .setMessage("Votre score est de " + score + ".")
-                        .setPositiveButton("Ok", (dialogInterface, which) -> {
-                            setResult(RESULT_OK, new Intent().putExtra(BUNDLE_EXTRA_SCORE, score));
-                            finish();
-                        })
-                        .create()
-                        .show();
-            else {
-                new Handler().postDelayed(() -> {
-                    q = bank.getQuestion();
-                    displayQuestion();
-                    enabledClick = true;
-                }, 1000);
-            }
-        }
+        enabledClick = false;
+        view.setBackgroundColor(getResources().getColor(buttonGoodAnswer));
+        makeText(this, "Bonne réponse !", LENGTH_SHORT).show();
+        score += q.score();
+        if (--numberOfQuestions == 0)
+            new AlertDialog.Builder(this)
+                    .setTitle("Jeu terminé")
+                    .setMessage("Votre score est de " + score + ".")
+                    .setPositiveButton("Ok", (dialogInterface, which) -> {
+                        setResult(RESULT_OK, new Intent().putExtra(BUNDLE_EXTRA_SCORE, score));
+                        finish();
+                    })
+                    .setCancelable(false)
+                    .create()
+                    .show();
         else {
-            view.setClickable(false);
-            view.setBackgroundColor(RED);
+            new Handler().postDelayed(() -> {
+                q = bank.getQuestion();
+                displayQuestion();
+                enabledClick = true;
+            }, 1000);
         }
     }
 
@@ -226,5 +219,23 @@ public final class GameActivity extends AppCompatActivity implements Button.OnCl
         answer2.setBackgroundColor(colors[1]);
         answer3.setBackgroundColor(colors[2]);
         answer4.setBackgroundColor(colors[3]);
+    }
+
+    /**
+     * Événement de clic sur une mauvaise réponse
+     */
+    private class BadAnswerClickListener implements Button.OnClickListener {
+
+        /**
+         * Désactivation du bouton et mise de son arrière-plan en rouge
+         *
+         * @param view bouton de mauvaise réponse
+         */
+        @Override
+        public void onClick(View view) {
+            view.setClickable(false);
+            view.setBackgroundColor(RED);
+            q.decrementsScore();
+        }
     }
 }
