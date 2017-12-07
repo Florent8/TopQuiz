@@ -2,6 +2,8 @@ package fr.fcomte.univ.iut.martin.florent.topquiz.models;
 
 import android.support.annotation.NonNull;
 
+import java.util.Comparator;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +36,23 @@ public final class Player implements Comparable<Player> {
     @Override
     public int compareTo(@NonNull final Player player) {
         return Byte.compare(score, player.score());
+    }
+
+    /**
+     * Comparator pour les noms des joueurs
+     */
+    public static class PlayerNameComparator implements Comparator<Player> {
+
+        /**
+         * Trie {@link Player#name} par ordre alphabétique
+         *
+         * @param p1 joueur 1
+         * @param p2 joueur 2
+         * @return si le nom de p1 est avant le nom de p2
+         */
+        @Override
+        public int compare(final Player p1, final Player p2) {
+            return p1.name().compareTo(p2.name());
+        }
     }
 }

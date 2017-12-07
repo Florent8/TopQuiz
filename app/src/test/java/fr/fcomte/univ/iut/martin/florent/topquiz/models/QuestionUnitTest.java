@@ -14,19 +14,13 @@ import static org.junit.Assert.assertNotNull;
 public class QuestionUnitTest {
 
     @Test
-    public void testQuestionsFromJSON() {
-        Question[] questions = null;
-        try {
-            questions = new Gson().fromJson(
-                    new InputStreamReader(
-                            new FileInputStream(new File("app/src/main/assets/questions.json"))),
-                    Question[].class
-            );
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
+    public void testQuestionsFromJSON() throws IOException {
+        final Question[] questions = new Gson().fromJson(
+                new InputStreamReader(
+                        new FileInputStream(new File("app/src/main/assets/questions.json"))),
+                Question[].class
+        );
 
-        assert questions != null;
         for (final Question question : questions) {
             assertNotNull(question.question());
             assertNotNull(question.answer1());

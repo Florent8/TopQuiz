@@ -6,12 +6,61 @@
     android:orientation="vertical"
     tools:context="fr.fcomte.univ.iut.martin.florent.topquiz.views.ScoreActivity">
 
-    <Button
-        android:id="@+id/menu_btn"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
-        android:padding="30dp"
-        android:text="@string/menu_button" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/menu_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/button_layout_margin"
+            android:text="@string/menu_button"
+            android:textSize="@dimen/button_score"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/sort_name_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/button_layout_margin"
+            android:text="@string/sort_name"
+            android:textSize="@dimen/button_score"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/sort_score_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/button_layout_margin"
+            android:text="@string/sort_score"
+            android:textSize="@dimen/button_score"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/table_margin"
+        android:layout_marginRight="@dimen/table_margin"
+        android:stretchColumns="1">
+
+        <TableRow tools:ignore="UselessParent">
+
+            <TextView
+                android:padding="@dimen/textview_table_padding"
+                android:text="@string/table_noms" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="@dimen/textview_table_padding"
+                android:text="@string/scores_button"
+                tools:ignore="RtlHardcoded" />
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

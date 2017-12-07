@@ -1,10 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:buttonStyle">@style/ButtonTopQuizTheme</item>
     </style>
 
-    <style name="ButtonTopQuizTheme" parent="Widget.AppCompat.Button.Borderless" />
+    <style name="ButtonTopQuizTheme" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:padding">30dp</item>
+    </style>
 
     <style name="AnswerButtonTheme">
         <item name="android:layout_margin">5dp</item>
@@ -12,5 +15,4 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">20sp</item>
     </style>
-
 </resources>

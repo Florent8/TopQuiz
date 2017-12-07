@@ -37,6 +37,7 @@ public final class MainActivity extends AppCompatActivity {
     @NonFinal Player            player;
     @NonFinal PlayersDatabase   playersDatabase;
     @NonFinal EditText          nameInput;
+    @NonFinal Button            scoreButton;
 
     /**
      * Initialisation des attributs de l'instance de {@link MainActivity} <br/>
@@ -89,8 +90,10 @@ public final class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(scores_btn)
+        scoreButton = findViewById(scores_btn);
+        scoreButton
                 .setOnClickListener(view -> startActivity(new Intent(this, ScoreActivity.class)));
+        scoreButton.setEnabled(false);
 
         setPlayerMessage();
     }
@@ -122,6 +125,7 @@ public final class MainActivity extends AppCompatActivity {
     private void setPlayerMessage() {
         stringBuilder.setLength(0);
         if (!player.name().equals("")) {
+            scoreButton.setEnabled(true);
             ((TextView) findViewById(name_text_view)).setText(
                     stringBuilder.append("Bonjour ").append(player.name())
                                  .append(" ! Ravi de vous revoir.\nVotre précédent score était de ")

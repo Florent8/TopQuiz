@@ -56,7 +56,7 @@ public final class PlayersDatabase extends Database {
             db.execSQL(
                     "INSERT OR REPLACE INTO " + TABLE_PLAYERS + "(" + KEY_NAME + "," + KEY_SCORE +
                     ")VALUES (:name, :score)",
-                    new Object[]{":name = " + p.name(), ":score=" + p.score()}
+                    new Object[]{p.name(), p.score()}
             );
         db.close();
     }
@@ -64,7 +64,7 @@ public final class PlayersDatabase extends Database {
     /**
      * @return liste des joueurs présents en base de données
      */
-    private List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         final SQLiteDatabase db = getReadableDatabase();
         final Cursor cursor = db.query(TABLE_PLAYERS,
                                        new String[]{KEY_NAME, KEY_SCORE},
