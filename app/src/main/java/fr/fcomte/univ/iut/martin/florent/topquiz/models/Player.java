@@ -35,7 +35,8 @@ public final class Player implements Comparable<Player> {
      */
     @Override
     public int compareTo(@NonNull final Player player) {
-        return Byte.compare(player.score(), score);
+        final int compare = Byte.compare(player.score(), score);
+        return compare == 0 ? new PlayerNameComparator().compare(this, player) : compare;
     }
 
     /**
@@ -52,7 +53,8 @@ public final class Player implements Comparable<Player> {
          */
         @Override
         public int compare(final Player p1, final Player p2) {
-            return p1.name().compareTo(p2.name());
+            final int compare = p1.name().compareTo(p2.name());
+            return compare == 0 ? p1.compareTo(p2) : compare;
         }
     }
 }
