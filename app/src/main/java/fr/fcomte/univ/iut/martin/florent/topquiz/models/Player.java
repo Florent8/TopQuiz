@@ -31,7 +31,7 @@ public final class Player implements Comparable<Player> {
      * Compare le score de ce joueur à un autre
      *
      * @param player jouer à comparer
-     * @return score > player.score
+     * @return score < player.score
      */
     @Override
     public int compareTo(@NonNull final Player player) {
@@ -53,7 +53,7 @@ public final class Player implements Comparable<Player> {
          */
         @Override
         public int compare(final Player p1, final Player p2) {
-            final int compare = p1.name().compareTo(p2.name());
+            final int compare = p1.name().toUpperCase().compareTo(p2.name().toUpperCase());
             return compare == 0 ? p1.compareTo(p2) : compare;
         }
     }

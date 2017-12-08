@@ -40,7 +40,7 @@ public final class Question implements Parcelable {
     String answer3;
     String answer4;
     byte   goodAnswer;
-    @NonFinal byte score = 4;
+    @NonFinal byte score = 3;
 
     /**
      * Constructeur pour {@link Parcelable}
